@@ -97,6 +97,12 @@ function setResponseContext(req, res, data) {
         contexts.push('author');
     } else if (data && data.post && data.post.page) {
         contexts.push('page');
+    } else if (/lookahead/g.test(res.locals.relativeUrl) ||
+               /shutdowns/g.test(res.locals.relativeUrl)) {
+        contexts.push('index');
+    } else if (/project-overview/g.test(res.locals.relativeUrl) ||
+               /contact/g.test(res.locals.relativeUrl)){
+        contexts.push('page');
     } else {
         contexts.push('post');
     }
@@ -148,7 +154,7 @@ function renderPost(req, res) {
     };
 }
 
-function renderChannel(channelOpts) {
+function renderChannel(channelOpts, filterer) {
     channelOpts = channelOpts || {};
 
     return function renderChannel(req, res, next) {
@@ -163,6 +169,12 @@ function renderChannel(channelOpts) {
         if (channelOpts.route.indexOf(':slug') !== -1) {
             options[channelOpts.name] = req.params.slug;
             hasSlug = true;
+        }
+
+        if(channelOpts.options) {
+            for(var p in channelOpts.options) {
+                options[p] = channelOpts.options[p];
+            }
         }
 
         function createUrl(page) {
@@ -197,6 +209,8 @@ function renderChannel(channelOpts) {
             }
 
             filters.doFilter('prePostsRender', page.posts, res.locals).then(function then(posts) {
+                if(filterer) posts = filterer(posts);
+
                 getActiveThemePaths().then(function then(paths) {
                     var view = 'index',
                         result,
@@ -234,7 +248,10 @@ frontendControllers = {
     homepage: renderChannel({
         name: 'home',
         route: '/',
-        firstPageTemplate: 'home'
+        firstPageTemplate: 'home',
+        options: {
+            tag: 'normal-post'
+        }
     }),
     tag: renderChannel({
         name: 'tag',
@@ -248,12 +265,38 @@ frontendControllers = {
         filter: 'author',
         slugTemplate: true
     }),
+    lookahead: renderChannel({
+        name: 'lookahead',
+        route: '/lookahead',
+        firstPageTemplate: 'lookahead',
+        options: {
+            tag: 'lookahead'
+        }
+    }),
+    projectOverview: renderChannel({
+        name: 'project-overview',
+        route: '/project-overview',
+        firstPageTemplate: 'project-overview'
+    }),
+    shutdowns: renderChannel({
+        name: 'shutdowns',
+        route: '/shutdowns',
+        firstPageTemplate: 'shutdowns',
+        options: {
+            tag: 'shutdowns'
+        }
+    }),
+    contact: renderChannel({
+        name: 'contact',
+        route: '/contact',
+        firstPageTemplate: 'contact'
+    }),
     preview: function preview(req, res, next) {
         var params = {
-                uuid: req.params.uuid,
-                status: 'all',
-                include: 'author,tags,fields'
-            };
+            uuid: req.params.uuid,
+            status: 'all',
+            include: 'author,tags,fields'
+        };
 
         api.posts.read(params).then(function then(result) {
             var post = result.posts[0];

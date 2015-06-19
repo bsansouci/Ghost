@@ -40,6 +40,16 @@ Router.map(function () {
         this.route('edit', {path: ':post_id'});
     });
 
+    this.route('lookahead', function () {
+        this.route('new', {path: ''});
+        this.route('edit', {path: ':post_id'});
+    });
+
+    this.route('shutdowns', function () {
+        this.route('new', {path: ''});
+        this.route('edit', {path: ':post_id'});
+    });
+
     this.route('settings.general', {path: '/settings/general'});
     this.route('settings.users', {path: '/settings/users'}, function () {
         this.route('user', {path: ':slug'});

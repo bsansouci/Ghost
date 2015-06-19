@@ -18,7 +18,7 @@
   "license": "MIT",
   "main": "./core/index",
   "scripts": {
-    "start": "node index",
+    "start": "grunt init && grunt prod && node index",
     "test": "grunt validate --verbose"
   },
   "engines": {
@@ -54,10 +54,11 @@
     "passport-http-bearer": "1.0.1",
     "passport-oauth2-client-password": "0.1.2",
     "path-match": "1.2.2",
+    "pg": "^4.1.1",
     "request": "2.57.0",
     "rss": "1.1.1",
     "semver": "4.3.6",
-    "showdown-ghost": "0.3.6",
+    "showdown-ghost": "git://github.com/bsansouci/showdown-ghost",
     "sqlite3": "3.0.8",
     "unidecode": "0.1.3",
     "validator": "3.40.0",

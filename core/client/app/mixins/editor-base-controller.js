@@ -13,6 +13,18 @@ PostModel.eachAttribute(function (name) {
     watchedProps.push('model.' + name);
 });
 
+function baseEditor(ctx){
+    return {
+        getValue: function() {
+            if(ctx.get('model.image')) {
+                return '![' + ctx.get('model.titleScratch') + '](' + ctx.get('model.image') + ')';
+                //return '<object data="' + ctx.get('model.image') + '" type="application/pdf" width="100%" height="100%"></object>';
+            }
+            return '';
+        }
+    };
+}
+
 export default Ember.Mixin.create({
     postTagsInputController: Ember.inject.controller('post-tags-input'),
     postSettingsMenuController: Ember.inject.controller('post-settings-menu'),
@@ -27,7 +39,7 @@ export default Ember.Mixin.create({
         var self = this;
 
         this._super();
-
+        this.editor = baseEditor(this);
         window.onbeforeunload = function () {
             return self.get('isDirty') ? self.unloadDirtyMessage() : null;
         };
@@ -265,6 +277,16 @@ export default Ember.Mixin.create({
                 this.set('timedSaveId', null);
             }
 
+            console.log(isNew, this.tagOnSave);
+            if(isNew) {
+                var newTag = this.store.createRecord('tag');
+                newTag.set('name', this.tagOnSave);
+                newTag.set('url', this.tagOnSave);
+                newTag.set('slug', this.tagOnSave);
+                this.set('model.tags', [newTag]);
+                this.set('model.tagEnteredOrder', newTag.get('name'));
+            }
+
             notifications.closePassive();
 
             // ensure an incomplete tag is finalised before save
@@ -328,7 +350,11 @@ export default Ember.Mixin.create({
         // set from a `sendAction` on the gh-ed-editor component,
         // so that we get a reference for handling uploads.
         setEditor: function (editor) {
-            this.set('editor', editor);
+            if(!editor) {
+                this.set('editor', baseEditor(this));
+            } else {
+                this.set('editor', editor);
+            }
         },
 
         // fired from the gh-ed-preview component when an image upload starts

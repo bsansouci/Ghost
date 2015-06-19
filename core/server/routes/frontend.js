@@ -46,6 +46,7 @@ frontendRoutes = function frontendRoutes(middleware) {
             frontend.private
         );
 
+
     rssRouter.route('/rss/').get(frontend.rss);
     rssRouter.route('/rss/:page/').get(frontend.rss);
     rssRouter.route('/feed/').get(function redirect(req, res) {
@@ -74,6 +75,22 @@ frontendRoutes = function frontendRoutes(middleware) {
     router.use('/' + routeKeywords.author + '/:slug/', authorRouter);
     router.use('/' + routeKeywords.tag + '/:slug/', tagRouter);
     router.use('/', indexRouter);
+
+    var lookaheadRouter = express.Router();
+    lookaheadRouter.route('/lookahead').get(frontend.lookahead);
+    router.use('/', lookaheadRouter);
+
+    var projectOverviewRouter = express.Router();
+    projectOverviewRouter.route('/project-overview').get(frontend.projectOverview);
+    router.use('/', projectOverviewRouter);
+
+    var contactRouter = express.Router();
+    contactRouter.route('/contact').get(frontend.contact);
+    router.use('/', contactRouter);
+
+    var shutdownsRouter = express.Router();
+    shutdownsRouter.route('/shutdowns').get(frontend.shutdowns);
+    router.use('/', shutdownsRouter);
 
     // Post Live Preview
     router.get('/' + routeKeywords.preview + '/:uuid', frontend.preview);

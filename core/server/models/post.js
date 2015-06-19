@@ -133,7 +133,7 @@ Post = ghostBookshelf.Model.extend({
         });
 
         ghostBookshelf.Model.prototype.saving.call(this, model, attr, options);
-
+        console.log('HTML -> ', converter.makeHtml(this.get('markdown')));
         this.set('html', converter.makeHtml(this.get('markdown')));
 
         // disabling sanitization until we can implement a better version

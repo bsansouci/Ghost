@@ -217,8 +217,8 @@ ConfigManager.prototype.set = function (config) {
         },
         uploads: {
             // Used by the upload API to limit uploads to images
-            extensions: ['.jpg', '.jpeg', '.gif', '.png', '.svg', '.svgz'],
-            contentTypes: ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml']
+            extensions: ['.jpg', '.jpeg', '.gif', '.png', '.svg', '.svgz', '.pdf'],
+            contentTypes: ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'application/pdf']
         },
         deprecatedItems: ['updateCheck', 'mail.fromaddress'],
         // create a hash for cache busting assets

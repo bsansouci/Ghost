@@ -17,7 +17,7 @@ var formatHTML = Ember.HTMLBars.makeBoundHelper(function (arr /* hashParams */) 
 
     // sanitize HTML
     // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
-    escapedhtml = html_sanitize(escapedhtml, cajaSanitizers.url, cajaSanitizers.id);
+    // escapedhtml = html_sanitize(escapedhtml, cajaSanitizers.url, cajaSanitizers.id);
     // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
 
     return Ember.String.htmlSafe(escapedhtml);

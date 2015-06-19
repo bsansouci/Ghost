@@ -22,7 +22,7 @@ UploadUi = function ($dropzone, settings) {
             var self = this;
 
             function showImage(width, height) {
-                $dropzone.find('img.js-upload-target').attr({width: width, height: height}).css({display: 'block'});
+                $dropzone.find('.js-upload-target').attr({width: "100%", height: height}).css({display: 'block'});
                 $dropzone.find('.fileupload-loading').remove();
                 $dropzone.css({height: 'auto'});
                 $dropzone.delay(250).animate({opacity: 100}, 1000, function () {
@@ -37,23 +37,25 @@ UploadUi = function ($dropzone, settings) {
                     $dropzone.css({minHeight: 0});
                     self.removeExtras();
                     $dropzone.animate({height: $img.height()}, 250, function () {
+                        console.log($img.height(), $img.innerHeight(), $img.outerHeight());
                         showImage($img.width(), $img.height());
                     });
                 });
             }
 
             function preLoadImage() {
-                var $img = $dropzone.find('img.js-upload-target')
-                    .attr({src: '', width: 'auto', height: 'auto'});
+                var $img = $dropzone.find('.js-upload-target')
+                    .attr({src: '', width: 'auto', height: 'auto', data: ''});
 
                 $progress.animate({opacity: 0}, 250, function () {
                     $dropzone.find('span.media').after('<img class="fileupload-loading"  src="' + Ghost.subdir + '/ghost/img/loadingcat.gif" />');
                     if (!settings.editor) {$progress.find('.fileupload-loading').css({top: '56px'}); }
                 });
                 $dropzone.trigger('uploadsuccess', [result]);
-                $img.one('load', function () {
+                $img.on('load', function () {
                     animateDropzone($img);
-                }).attr('src', result);
+                }).attr({src: result, data: result});
+                animateDropzone($img);
             }
             preLoadImage();
         },
@@ -146,7 +148,7 @@ UploadUi = function ($dropzone, settings) {
             var self = this;
 
             // This is the start point if no image exists
-            $dropzone.find('img.js-upload-target').css({display: 'none'});
+            $dropzone.find('.js-upload-target').css({display: 'none'});
             $dropzone.find('div.description').show();
             $dropzone.removeClass('pre-image-uploader image-uploader-url').addClass('image-uploader');
             this.removeExtras();
@@ -213,10 +215,10 @@ UploadUi = function ($dropzone, settings) {
             // This is the start point if an image already exists
             $dropzone.removeClass('image-uploader image-uploader-url').addClass('pre-image-uploader');
             $dropzone.find('div.description').hide();
-            $dropzone.find('img.js-upload-target').show();
+            $dropzone.find('.js-upload-target').show();
             $dropzone.append($cancel);
             $dropzone.find('.js-cancel').on('click', function () {
-                $dropzone.find('img.js-upload-target').attr({src: ''});
+                $dropzone.find('.js-upload-target').attr({src: '', data: ''});
                 $dropzone.find('div.description').show();
                 $dropzone.trigger('imagecleared');
                 $dropzone.delay(2500).animate({opacity: 100}, 1000, function () {
@@ -229,14 +231,14 @@ UploadUi = function ($dropzone, settings) {
         },
 
         init: function () {
-            var imageTarget = $dropzone.find('img.js-upload-target');
+            var imageTarget = $dropzone.find('.js-upload-target');
             // First check if field image is defined by checking for js-upload-target class
             if (!imageTarget[0]) {
                 // This ensures there is an image we can hook into to display uploaded image
-                $dropzone.prepend('<img class="js-upload-target" style="display: none"  src="" />');
+                $dropzone.prepend('<img class="js-upload-target" style="display: none"  src="" data=""/>');
             }
             $('.js-button-accept').prop('disabled', false);
-            if (imageTarget.attr('src') === '' || imageTarget.attr('src') === undefined) {
+            if (imageTarget.attr('src') === '' || imageTarget.attr('src') === undefined || imageTarget.attr('data') === '' || imageTarget.attr('data') === undefined) {
                 this.initWithDropzone();
             } else {
                 this.initWithImage();
