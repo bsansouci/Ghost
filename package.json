@@ -18,7 +18,7 @@
   "license": "MIT",
   "main": "./core/index",
   "scripts": {
-    "start": "npm i grunt && grunt init && grunt prod && node index",
+    "start": "npm i grunt-cli && grunt init && grunt prod && node index",
     "test": "grunt validate --verbose"
   },
   "engines": {
