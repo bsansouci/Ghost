@@ -905,7 +905,7 @@ var _              = require('lodash'),
         // `bower` does have some quirks, such as not running as root. If you have problems please try running
         // `grunt init --verbose` to see if there are any errors.
         grunt.registerTask('init', 'Prepare the project for development',
-            ['update_submodules', 'assets', 'default']);
+            ['shell:ember:init', 'shell:bower', 'update_submodules', 'assets', 'default']);
 
         // ### Basic Asset Building
         // Builds and moves necessary client assets. Prod additionally builds the ember app.
@@ -924,7 +924,7 @@ var _              = require('lodash'),
         //
         // It is otherwise the same as running `grunt`, but is only used when running Ghost in the `production` env.
         grunt.registerTask('prod', 'Build JS & templates for production',
-            ['uglify:prod', 'master-warn']);
+            ['shell:ember:prod', 'uglify:prod', 'master-warn']);
 
         // ### Live reload
         // `grunt dev` - build assets on the fly whilst developing
