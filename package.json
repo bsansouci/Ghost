@@ -79,13 +79,7 @@
     "grunt-mocha-cli": "1.13.0",
     "grunt-mocha-istanbul": "2.4.0",
     "grunt-shell": "1.1.2",
-    "grunt-update-submodules": "0.4.1"
-  },
-  "optionalDependencies": {
-    "mysql": "2.1.1",
-    "pg": "4.1.1"
-  },
-  "devDependencies": {
+    "grunt-update-submodules": "0.4.1",
     "csscomb": "3.0.4",
     "matchdep": "0.3.0",
     "nock": "2.3.0",
@@ -95,5 +89,9 @@
     "supertest": "1.0.1",
     "testem": "0.8.3",
     "top-gh-contribs": "1.0.1"
+  },
+  "optionalDependencies": {
+    "mysql": "2.1.1",
+    "pg": "4.1.1"
   }
 }
