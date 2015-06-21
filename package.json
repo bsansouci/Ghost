@@ -18,7 +18,7 @@
   "license": "MIT",
   "main": "./core/index",
   "scripts": {
-    "postinstall": "./node_modules/ember-cli/bin/ember init && ./node_modules/bower/bin/bower && grunt init && ./node_modules/ember-cli/bin/ember prod && grunt prod",
+    "postinstall": "./node_modules/ember-cli/bin/ember init && ./node_modules/bower/bin/bower prod && grunt init && ./node_modules/ember-cli/bin/ember prod && grunt prod",
     "start": "node index",
     "test": "grunt validate --verbose"
   },
