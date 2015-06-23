@@ -301,7 +301,6 @@ var _              = require('lodash'),
             shell: {
                 ember: {
                     command: function (mode) {
-                        console.log("mode ---->", mode);
                         switch (mode) {
                             case 'init':
                                 return 'echo Installing client dependencies... && npm install';
