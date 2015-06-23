@@ -910,7 +910,7 @@ var _              = require('lodash'),
         // ### Basic Asset Building
         // Builds and moves necessary client assets. Prod additionally builds the ember app.
         grunt.registerTask('assets', 'Basic asset building & moving',
-            ['clean:tmp', 'buildAboutPage', 'copy:jquery']);
+            ['clean:tmp', 'copy:jquery']);
 
         // ### Default asset build
         // `grunt` - default grunt task
