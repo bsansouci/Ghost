@@ -9,6 +9,7 @@
     "blog",
     "cms"
   ],
+  "cacheDirectories": ["node_modules", "bower_components"],
   "repository": {
     "type": "git",
     "url": "git://github.com/TryGhost/Ghost.git"
@@ -18,7 +19,7 @@
   "license": "MIT",
   "main": "./core/index",
   "scripts": {
-    "postinstall": "./node_modules/grunt-cli/bin/grunt init && ./node_modules/grunt-cli/bin/grunt prod",
+    "postinstall": "grunt heroku",
     "start": "node index",
     "test": "grunt validate --verbose"
   },

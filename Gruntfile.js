@@ -907,6 +907,9 @@ var _              = require('lodash'),
         grunt.registerTask('init', 'Prepare the project for development',
             ['shell:ember:init', 'shell:bower', 'assets', 'default']);
 
+        grunt.registerTask('heroku', 'Prepare the project for development',
+            ['shell:ember:init', 'shell:bower', 'assets', 'prod']);
+
         // ### Basic Asset Building
         // Builds and moves necessary client assets. Prod additionally builds the ember app.
         grunt.registerTask('assets', 'Basic asset building & moving',
