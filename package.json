@@ -19,7 +19,7 @@
   "license": "MIT",
   "main": "./core/index",
   "scripts": {
-    "postinstall": "grunt heroku",
+    "postinstall": "grunt init && grunt prod",
     "start": "node index",
     "test": "grunt validate --verbose"
   },

@@ -6,11 +6,14 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app'),
     assetLocation,
     app;
 
-assetLocation = function (fileName) {
+var isProd = function(fileName) {
     if (isProduction) {
-        fileName = fileName.replace('.', '.min.');
+        return fileName.replace('.', '.min.');
     }
-    return '/assets/' + fileName;
+    return fileName;
+}
+assetLocation = function (fileName) {
+    return '/assets/' + isProd(fileName);
 };
 
 app = new EmberApp({
@@ -27,7 +30,7 @@ app = new EmberApp({
         source: './app/styles/app.css',
         inputFile: 'app.css',
         browsers: 'last 2 versions',
-        outputFile: 'ghost.css'
+        outputFile: isProd('ghost.css')
     },
     hinting: false,
     fingerprint: disabled
