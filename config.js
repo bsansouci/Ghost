@@ -11,12 +11,16 @@ config = {
     // When running Ghost in the wild, use the production environment.
     // Configure your URL and mail settings here
     production: {
-        url: 'http://stemmler-hall.herokuapp.com',
+        url: 'http://stemmlerhall.com',
         mail: {},
-        fileStorage: false,
         database: {
             client: 'postgres',
-            connection: process.env.DATABASE_URL,
+            connection: {
+                host     : process.env.PGHOSTADDR,
+                user     : process.env.PGUSER,
+                password : process.env.PGPASSWORD,
+                database : 'ghost_db',
+            },
             debug: false,
             // client: 'sqlite3',
             // connection: {

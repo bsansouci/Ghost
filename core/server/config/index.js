@@ -372,7 +372,7 @@ ConfigManager.prototype.validate = function () {
 
     hasHostAndPort = config.server && !!config.server.host && !!config.server.port;
     hasSocket = config.server && !!config.server.socket;
-
+    console.log(config);
     // Check for valid server host and port values
     if (!config.server || !(hasHostAndPort || hasSocket)) {
         errors.logError(new Error('Your server values (socket, or host and port) in config.js are invalid.'), JSON.stringify(config.server), 'Please provide them before restarting.');

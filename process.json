@@ -1,0 +1,8 @@
+{
+  "apps" : [{
+    "name"        : "stemmler hall",
+    "script"      : "index.js",
+    "args"        : ["--production"],
+    "merge_logs"  : true
+  }]
+}
