@@ -12,7 +12,16 @@ config = {
     // Configure your URL and mail settings here
     production: {
         url: 'http://stemmlerhall.com',
-        mail: {},
+        mail: {
+              transport: 'SMTP',
+              options: {
+                  service: 'Mailgun',
+                  auth: {
+                      user: 'postmaster@stemmlerhall.com', // mailgun username
+                      pass: '96a37c9805f9dc4517c4e5dc2b8ad502'  // mailgun password
+                  }
+              }
+        },
         database: {
             client: 'postgres',
             connection: {
