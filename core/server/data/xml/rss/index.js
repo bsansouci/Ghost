@@ -179,8 +179,13 @@ generateFeed = function generateFeed(data) {
             });
 
             // Also add the image to the content, because not all readers support media:content
-            htmlContent('p').first().before('<img src="' + imageUrl + '" />');
-            htmlContent('img').attr('alt', post.title);
+            if(imageUrl.indexOf('.pdf') === imageUrl.length - 4) {
+                htmlContent('p').first().before('<object data="' + imageUrl + '" type="application/pdf">' + post.title + '</object>');
+            } else {
+                htmlContent('p').first().before('<img src="' + imageUrl + '" />');
+                htmlContent('img').attr('alt', post.title);
+            }
+
         }
 
         item.custom_elements.push({

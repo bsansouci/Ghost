@@ -59,6 +59,8 @@ posts = {
             options.include = prepareInclude(options.include);
         }
 
+        if(options.tag === 'lookahead') options.limit = 1;
+
         return dataProvider.Post.findPage(options);
     },
 
