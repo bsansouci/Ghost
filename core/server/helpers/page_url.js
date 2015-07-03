@@ -31,7 +31,6 @@ page_url = function (context, block) {
     }
 
     url += '/';
-
     return url;
 };
 

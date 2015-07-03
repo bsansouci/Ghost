@@ -235,7 +235,6 @@ function renderChannel(channelOpts, filterer) {
                     } else {
                         result = formatPageResponse(posts, page);
                     }
-
                     setResponseContext(req, res);
                     res.render(view, result);
                 });
@@ -268,7 +267,6 @@ frontendControllers = {
     lookahead: renderChannel({
         name: 'lookahead',
         route: '/lookahead',
-        firstPageTemplate: 'lookahead',
         options: {
             tag: 'lookahead'
         }
@@ -276,12 +274,10 @@ frontendControllers = {
     projectOverview: renderChannel({
         name: 'project-overview',
         route: '/project-overview',
-        firstPageTemplate: 'project-overview'
     }),
     shutdowns: renderChannel({
         name: 'shutdowns',
         route: '/shutdowns',
-        firstPageTemplate: 'shutdowns',
         options: {
             tag: 'shutdowns'
         }
@@ -289,7 +285,6 @@ frontendControllers = {
     contact: renderChannel({
         name: 'contact',
         route: '/contact',
-        firstPageTemplate: 'contact'
     }),
     preview: function preview(req, res, next) {
         var params = {

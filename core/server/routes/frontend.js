@@ -77,20 +77,22 @@ frontendRoutes = function frontendRoutes(middleware) {
     router.use('/', indexRouter);
 
     var lookaheadRouter = express.Router();
-    lookaheadRouter.route('/lookahead').get(frontend.lookahead);
-    router.use('/', lookaheadRouter);
+    lookaheadRouter.route('/').get(frontend.lookahead);
+    lookaheadRouter.route('/' + routeKeywords.page + '/:page/').get(frontend.lookahead);
+    router.use('/lookahead/', lookaheadRouter);
 
     var projectOverviewRouter = express.Router();
-    projectOverviewRouter.route('/project-overview').get(frontend.projectOverview);
-    router.use('/', projectOverviewRouter);
+    projectOverviewRouter.route('/').get(frontend.projectOverview);
+    router.use('/project-overview/', projectOverviewRouter);
 
     var contactRouter = express.Router();
-    contactRouter.route('/contact').get(frontend.contact);
-    router.use('/', contactRouter);
+    contactRouter.route('/').get(frontend.contact);
+    router.use('/contact/', contactRouter);
 
     var shutdownsRouter = express.Router();
-    shutdownsRouter.route('/shutdowns').get(frontend.shutdowns);
-    router.use('/', shutdownsRouter);
+    shutdownsRouter.route('/').get(frontend.shutdowns);
+    shutdownsRouter.route('/' + routeKeywords.page + '/:page/').get(frontend.shutdowns);
+    router.use('/shutdowns/', shutdownsRouter);
 
     // Post Live Preview
     router.get('/' + routeKeywords.preview + '/:uuid', frontend.preview);

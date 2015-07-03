@@ -1,0 +1,9 @@
+<nav class="pagination" role="navigation">
+    {{#if prev}}
+        <a class="newer-posts" href="/shutdowns{{page_url prev}}">&larr; Newer Shutdown</a>
+    {{/if}}
+    <span class="page-number">Page {{page}} of {{pages}}</span>
+    {{#if next}}
+        <a class="older-posts" href="/shutdowns{{page_url next}}">Older Shutdown &rarr;</a>
+    {{/if}}
+</nav>

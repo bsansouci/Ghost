@@ -38,6 +38,10 @@ pagination = function (options) {
         context.authorSlug = this.author.slug;
     }
 
+    if(options.hash && options.hash.templateName) {
+        return template.execute(options.hash.templateName, context, options);
+    }
+    // console.log(options, context);
     return template.execute('pagination', context, options);
 };
 
