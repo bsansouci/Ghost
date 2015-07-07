@@ -20,33 +20,7 @@ var ShutdownsNewController = Ember.Controller.extend(EditorControllerMixin, {
                     self.replaceRoute('shutdowns.edit', model);
                 }
             });
-        },
-        setCoverImage: function (image) {
-            var self = this;
-            this.set('model.image', image);
-            if (this.get('model.isNew')) {
-                return;
-            }
-
-            this.get('model').save().catch(function (errors) {
-                self.showErrors(errors);
-                self.get('model').rollback();
-            });
-        },
-        clearCoverImage: function () {
-            var self = this;
-            console.log("clearCoverImage called?");
-            // this.set('model.image', '');
-
-            // if (this.get('model.isNew')) {
-            //     return;
-            // }
-
-            // this.get('model').save().catch(function (errors) {
-            //     self.showErrors(errors);
-            //     self.get('model').rollback();
-            // });
-        },
+        }
     }
 });
 
