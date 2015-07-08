@@ -98,7 +98,8 @@ function setResponseContext(req, res, data) {
     } else if (data && data.post && data.post.page) {
         contexts.push('page');
     } else if (/lookahead/g.test(res.locals.relativeUrl) ||
-               /shutdowns/g.test(res.locals.relativeUrl)) {
+               /shutdowns/g.test(res.locals.relativeUrl) ||
+               /contact/g.test(res.locals.relativeUrl)) {
         contexts.push('index');
     } else if (/project-overview/g.test(res.locals.relativeUrl) ||
                /contact/g.test(res.locals.relativeUrl)){
@@ -285,6 +286,9 @@ frontendControllers = {
     contact: renderChannel({
         name: 'contact',
         route: '/contact',
+        options: {
+            tag: 'contact'
+        }
     }),
     preview: function preview(req, res, next) {
         var params = {
