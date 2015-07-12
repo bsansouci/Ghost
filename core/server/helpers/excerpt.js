@@ -24,9 +24,10 @@ excerpt = function (options) {
     // Strip inline and bottom footnotes
     excerpt = excerpt.replace(/<a href="#fn.*?rel="footnote">.*?<\/a>/gi, '');
     excerpt = excerpt.replace(/<div class="footnotes"><ol>.*?<\/ol><\/div>/, '');
+
     // Strip other html
-    excerpt = excerpt.replace(/<\/?[^>]+>/gi, '');
-    excerpt = excerpt.replace(/(\r\n|\n|\r)+/gm, ' ');
+    // excerpt = excerpt.replace(/<\/?[^>]+>/gi, '');
+    // excerpt = excerpt.replace(/(\r\n|\n|\r)+/gm, ' ');
     /*jslint regexp:false */
 
     if (!truncateOptions.words && !truncateOptions.characters) {
